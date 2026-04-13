@@ -1,0 +1,86 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { 
+    typeName: 'Package', 
+    typeNamePlural: 'Packages', 
+    title: { type: #STANDARD, value: 'PackageId' },
+    description: { type: #STANDARD, value: 'DestinationCity' }
+  }
+}
+annotate view ZCIT_C_PKG_22AD067 with
+{
+  @UI.facet: [
+    { 
+      id: 'PackageInfo', 
+      purpose: #STANDARD, 
+      type: #IDENTIFICATION_REFERENCE, 
+      label: 'Package Details', 
+      position: 10 
+    },
+    { 
+      id: 'TrackingLogs', 
+      purpose: #STANDARD, 
+      type: #LINEITEM_REFERENCE, 
+      label: 'Tracking History', 
+      position: 20, 
+      targetElement: '_TrackingLogs' 
+    }
+  ]
+
+  @UI: { 
+    lineItem:       [ { position: 10, label: 'Tracking / Package ID' } ], 
+    identification: [ { position: 10, label: 'Tracking / Package ID' } ], 
+    selectionField: [ { position: 10 } ] 
+  }
+  PackageId;
+  
+  @UI: { 
+    lineItem:       [ { position: 20, label: 'Sender Name' } ], 
+    identification: [ { position: 20, label: 'Sender Name' } ] 
+  }
+  SenderName;
+  
+  @UI: { 
+    lineItem:       [ { position: 30, label: 'Receiver Name' } ], 
+    identification: [ { position: 30, label: 'Receiver Name' } ] 
+  }
+  ReceiverName;
+
+  @UI: { 
+    lineItem:       [ { position: 40, label: 'Destination City' } ], 
+    identification: [ { position: 40, label: 'Destination City' } ],
+    selectionField: [ { position: 20 } ]
+  }
+  DestinationCity;
+
+  /* --- UI COLOR LOGIC 1: Priority --- */
+  @UI: { 
+    lineItem:       [ { position: 50, label: 'Priority (1=High, 2=Med, 3=Low)', criticality: 'PriorityCriticality', criticalityRepresentation: #WITHOUT_ICON } ], 
+    identification: [ { position: 50, label: 'Priority', criticality: 'PriorityCriticality' } ] 
+  }
+  Priority;
+
+  /* --- UI COLOR LOGIC 2: Delivery Status --- */
+  @UI: { 
+    lineItem:       [ { position: 60, label: 'Status (P/T/D/X)', criticality: 'StatusCriticality', criticalityRepresentation: #WITHOUT_ICON } ], 
+    identification: [ { position: 60, label: 'Status', criticality: 'StatusCriticality' } ],
+    selectionField: [ { position: 30 } ]
+  }
+  DeliveryStatus;
+
+  /* Hide the raw number logic from the user, they only need to see the colors! */
+  @UI.hidden: true
+  StatusCriticality;
+  @UI.hidden: true
+  PriorityCriticality;
+  
+  @UI.hidden: true
+  CreatedBy;
+  @UI.hidden: true
+  CreatedAt;
+  @UI.hidden: true
+  LastChangedBy;
+  @UI.hidden: true
+  LastChangedAt;
+}

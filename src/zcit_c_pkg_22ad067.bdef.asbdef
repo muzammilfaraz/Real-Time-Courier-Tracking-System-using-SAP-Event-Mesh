@@ -1,0 +1,19 @@
+projection;
+strict ( 2 );
+
+define behavior for ZCIT_C_PKG_22AD067 alias Package
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _TrackingLogs { create; }
+}
+
+define behavior for ZCIT_C_TRK_22AD067 alias TrackingLog
+{
+  use update;
+  use delete;
+
+  use association _Package;
+}

@@ -1,0 +1,52 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { 
+    typeName: 'Tracking Log', 
+    typeNamePlural: 'Tracking History', 
+    title: { type: #STANDARD, value: 'ScanLocation' },
+    description: { type: #STANDARD, value: 'EventDescription' }
+  }
+}
+annotate view ZCIT_C_TRK_22AD067 with
+{
+  @UI.facet: [
+    { 
+      id: 'LogInfo', 
+      purpose: #STANDARD, 
+      type: #IDENTIFICATION_REFERENCE, 
+      label: 'Scan Details', 
+      position: 10 
+    }
+  ]
+
+  @UI.hidden: true 
+  PackageId;
+
+  @UI: { 
+    lineItem:       [ { position: 10, label: 'Log Seq. No.' } ], 
+    identification: [ { position: 10, label: 'Log Seq. No.' } ] 
+  }
+  TrackingId;
+
+  @UI: { 
+    lineItem:       [ { position: 20, label: 'Scan Location' } ], 
+    identification: [ { position: 20, label: 'Scan Location' } ] 
+  }
+  ScanLocation;
+
+  @UI: { 
+    lineItem:       [ { position: 30, label: 'Event Description' } ], 
+    identification: [ { position: 30, label: 'Event Description' } ] 
+  }
+  EventDescription;
+
+  @UI: { 
+    lineItem:       [ { position: 40, label: 'Time of Scan' } ], 
+    identification: [ { position: 40, label: 'Time of Scan' } ] 
+  }
+  ScanTimestamp;
+
+  @UI.hidden: true
+  ScannedBy;
+}

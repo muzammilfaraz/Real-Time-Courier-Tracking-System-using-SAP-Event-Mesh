@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Courier Package'
+define service ZCIT_UI_PKG_22AD067 {
+  expose ZCIT_C_PKG_22AD067 as Package;
+  expose ZCIT_C_TRK_22AD067 as TrackingLog;
+}

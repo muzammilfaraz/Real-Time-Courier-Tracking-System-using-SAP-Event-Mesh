@@ -1,0 +1,57 @@
+unmanaged implementation in class zbp_cit_pkg_22ad067 unique;
+strict ( 2 );
+
+define behavior for ZCIT_I_PKG_22AD067 alias Package
+lock master
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+  association _TrackingLogs { create; }
+
+  /* --- THE SAP EVENT MESH TRIGGER --- */
+  /* This event broadcasts our Abstract Entity payload to the Cloud */
+  event PackageUpdated parameter ZCIT_A_EVT_22AD067;
+  /* ---------------------------------- */
+
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy;
+  field ( readonly : update ) PackageId;
+
+  mapping for zcit_pkg_22ad067
+  {
+    PackageId = package_id;
+    SenderName = sender_name;
+    ReceiverName = receiver_name;
+    DestinationCity = destination_city;
+    Priority = priority;
+    DeliveryStatus = delivery_status;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+  }
+}
+
+define behavior for ZCIT_I_TRK_22AD067 alias TrackingLog
+lock dependent by _Package
+authorization dependent by _Package
+{
+  update;
+  delete;
+
+  field ( readonly ) PackageId;
+  field ( readonly : update ) TrackingId;
+
+  association _Package;
+
+  mapping for zcit_trk_22ad067
+  {
+    PackageId = package_id;
+    TrackingId = tracking_id;
+    ScanLocation = scan_location;
+    EventDescription = event_description;
+    ScanTimestamp = scan_timestamp;
+    ScannedBy = scanned_by;
+  }
+}
